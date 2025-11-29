@@ -2,15 +2,15 @@ Healthpoint Hospital - Patient Appointment Portal
 
 ### Landing Page
 
-![Landing Page](screenshots/landing.png)
+![Landing Page](public/screenshots/landing.png)
 
 ### Booking Wizard
 
-![Booking Wizard](screenshots/booking.png)
+![Booking Wizard](public/screenshots/booking.png)
 
 ### Admin Dashboard
 
-![Admin Dashboard](screenshots/dashboard.png)
+![Admin Dashboard](public/screenshots/dashboard.png)
 
 🏥 Project Overview
 
