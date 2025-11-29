@@ -186,9 +186,12 @@ export function Footer() {
                 </div>
                 <div>
                   <p className="text-white font-medium mb-1">Call Us</p>
-                  <p className="text-slate-400 text-sm">
+                  <a
+                    href="tel:+2348006092134"
+                    className="text-slate-400 text-sm hover:text-white transition-colors"
+                  >
                     +234 (0) 800-609-2134
-                  </p>
+                  </a>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -197,7 +200,12 @@ export function Footer() {
                 </div>
                 <div>
                   <p className="text-white font-medium mb-1">Email Us</p>
-                  <p className="text-slate-400 text-sm">info@healthpoint.com</p>
+                  <a
+                    href="mailto:info@healthpoint.com"
+                    className="text-slate-400 text-sm hover:text-white transition-colors"
+                  >
+                    info@healthpoint.com
+                  </a>
                 </div>
               </li>
             </ul>
