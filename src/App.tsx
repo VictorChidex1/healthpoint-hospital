@@ -7,6 +7,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { DoctorProfile } from "./pages/DoctorProfile";
 import { Doctors } from "./pages/Doctors";
 import { Services } from "./pages/Services";
+import { Contact } from "./pages/Contact";
 import { Footer } from "./components/layout/Footer"; // NEW IMPORT
 import { AppointmentProvider } from "./context/AppointmentContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -67,6 +68,9 @@ function App() {
 
                 {/* Services Page */}
                 <Route path="/services" element={<Services />} />
+
+                {/* Contact Page */}
+                <Route path="/contact" element={<Contact />} />
 
                 {/* Authentication Routes */}
                 <Route path="/login" element={<LoginPage />} />
