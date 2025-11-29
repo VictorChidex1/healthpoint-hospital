@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Stethoscope } from "lucide-react";
+import { Menu, X, Stethoscope, User } from "lucide-react"; // Added 'User' icon
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useAuth } from "../../context/AuthContext"; // Import Auth
 
 export function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
@@ -13,6 +14,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, logout } = useAuth(); // Get auth state
 
   // Check if we are on a page with a blue header (like /book)
   const isBluePage = location.pathname === "/book";
@@ -81,7 +83,6 @@ export function Navbar() {
                   useWhiteText
                     ? "text-white"
                     : "text-slate-600 hover:text-primary-600",
-                  // Active state logic
                   location.pathname === link.path && !useWhiteText
                     ? "text-primary-600"
                     : ""
@@ -90,18 +91,34 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            {/* Add this link before the Book Appointment button */}
-            <Link
-              to="/login"
-              className={cn(
-                "text-sm font-medium transition-colors hover:opacity-80 mr-4", // mr-4 adds spacing
-                useWhiteText
-                  ? "text-white"
-                  : "text-slate-600 hover:text-primary-600"
-              )}
-            >
-              Doctor Login
-            </Link>
+
+            {/* Conditional Login/Logout/Admin Link */}
+            {isAuthenticated ? (
+              <button
+                onClick={logout}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:opacity-80",
+                  useWhiteText
+                    ? "text-white"
+                    : "text-slate-600 hover:text-primary-600"
+                )}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className={cn(
+                  "text-sm font-medium transition-colors hover:opacity-80 mr-4",
+                  useWhiteText
+                    ? "text-white"
+                    : "text-slate-600 hover:text-primary-600"
+                )}
+              >
+                Doctor Login
+              </Link>
+            )}
+
             <Link
               to="/book"
               className={cn(
@@ -134,7 +151,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown (Animated) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -154,6 +171,36 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
+
+              {/* === MOBILE DOCTOR LOGIN/LOGOUT LINK (New) === */}
+              {isAuthenticated ? (
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-left flex items-center gap-3 px-3 py-3 text-base font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <User className="w-5 h-5" /> Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-3 px-3 py-3 text-base font-medium text-slate-600 hover:text-primary-600 hover:bg-slate-50 rounded-lg transition-colors"
+                >
+                  <User className="w-5 h-5" /> Doctor Login
+                </Link>
+              )}
+              {/* ============================================== */}
+
+              <Link
+                to="/book"
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-center mt-4 bg-primary-600 text-white px-5 py-3 rounded-lg font-bold hover:bg-primary-700"
+              >
+                Book Appointment
+              </Link>
             </div>
           </motion.div>
         )}
