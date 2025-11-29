@@ -16,8 +16,9 @@ export function Navbar() {
   const location = useLocation();
   const { isAuthenticated, logout } = useAuth(); // Get auth state
 
-  // Check if we are on a page with a blue header (like /book)
-  const isBluePage = location.pathname === "/book";
+  // Check if we are on a page with a blue header (like /book) or dark hero (like /services)
+  const isBluePage =
+    location.pathname === "/book" || location.pathname === "/services";
 
   useEffect(() => {
     const handleScroll = () => {

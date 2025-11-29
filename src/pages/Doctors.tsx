@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { doctors } from "../data/doctors";
-import { Stethoscope, Search, MapPin, Star } from "lucide-react";
+import { Stethoscope, Search, Star, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "../components/layout/Navbar";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Doctors() {
   const [specialtyFilter, setSpecialtyFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const specialties = ["All", ...new Set(doctors.map((d) => d.specialty))];
 
@@ -20,7 +34,7 @@ export function Doctors() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 relative">
       {/* Hero Section */}
       <div className="bg-white pt-32 pb-12 px-4 sm:px-6 lg:px-8 border-b border-slate-100">
         <div className="max-w-7xl mx-auto text-center">
@@ -110,12 +124,11 @@ export function Doctors() {
 
                   <div className="flex gap-3">
                     <Link
-                      to={`/book?doctorId=${doctor.id}`} // Option 1: Link directly to booking wizard (better UX)
+                      to={`/book?doctorId=${doctor.id}`}
                       className="flex-1 bg-primary-600 text-white py-2.5 rounded-lg font-medium text-center hover:bg-primary-700 transition-colors"
                     >
                       Book Appointment
                     </Link>
-                    {/* Profile Link (New) */}
                     <Link
                       to={`/doctors/${doctor.id}`}
                       className="px-3 py-2.5 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-medium transition-colors"
@@ -129,6 +142,22 @@ export function Doctors() {
           )}
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 p-4 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors z-50"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

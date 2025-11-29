@@ -16,12 +16,15 @@ export interface Appointment {
   date: string;
   timeSlot: string;
   reason: string;
-  status: 'confirmed' | 'cancelled';
+  status: "confirmed" | "cancelled";
 }
 
 export interface Service {
   id: string;
   name: string;
-  icon: string;
-  description: string;
+  icon: React.ReactNode;
+  shortDescription: string;
+  fullDescription: string;
+  features: string[];
+  commonConditions: string[];
 }
