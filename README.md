@@ -1,5 +1,17 @@
 Healthpoint Hospital - Patient Appointment Portal
 
+### Landing Page
+
+![Landing Page](screenshots/landing.png)
+
+### Booking Wizard
+
+![Booking Wizard](screenshots/booking.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](screenshots/dashboard.png)
+
 🏥 Project Overview
 
 Healthpoint Hospital is a modern, responsive web application designed to streamline the patient booking process. It replaces traditional phone scheduling with a sleek, digital interface that allows patients to select specialists, view real-time availability, and secure appointments in under 2 minutes.
@@ -65,8 +77,6 @@ Glassmorphism: Modern design elements with backdrop blurs and smooth transitions
 Accessibility: Focus states and semantic HTML structure.
 
 📸 Screenshots
-
-(You can add screenshots here later)
 
 ⚡ Getting Started
 
