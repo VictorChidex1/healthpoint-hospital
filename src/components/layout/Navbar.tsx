@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Stethoscope } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { useState, useEffect } from "react";
+import { Menu, X, Stethoscope } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
@@ -15,20 +15,20 @@ export function Navbar() {
   const location = useLocation();
 
   // Check if we are on a page with a blue header (like /book)
-  const isBluePage = location.pathname === '/book';
+  const isBluePage = location.pathname === "/book";
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Doctors', path: '/doctors' },
-    { name: 'Services', path: '/services' },
+    { name: "Home", path: "/" },
+    { name: "Doctors", path: "/doctors" },
+    { name: "Services", path: "/services" },
   ];
 
   // Logic: Text is white ONLY if we are on a Blue Page AND haven't scrolled yet
@@ -41,8 +41,8 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className={cn(
         "fixed w-full z-50 transition-all duration-300",
-        scrolled 
-          ? "bg-white/90 backdrop-blur-md shadow-md py-2" 
+        scrolled
+          ? "bg-white/90 backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
       )}
     >
@@ -50,16 +50,22 @@ export function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className={cn(
-              "p-2 rounded-lg transition-colors",
-              useWhiteText ? "bg-white text-primary-600" : "bg-primary-600 text-white"
-            )}>
+            <div
+              className={cn(
+                "p-2 rounded-lg transition-colors",
+                useWhiteText
+                  ? "bg-white text-primary-600"
+                  : "bg-primary-600 text-white"
+              )}
+            >
               <Stethoscope className="h-6 w-6" />
             </div>
-            <span className={cn(
-              "text-xl font-bold transition-colors",
-              useWhiteText ? "text-white" : "text-slate-900"
-            )}>
+            <span
+              className={cn(
+                "text-xl font-bold transition-colors",
+                useWhiteText ? "text-white" : "text-slate-900"
+              )}
+            >
               Healthpoint
             </span>
           </Link>
@@ -72,20 +78,36 @@ export function Navbar() {
                 to={link.path}
                 className={cn(
                   "text-sm font-medium transition-colors hover:opacity-80",
-                  useWhiteText ? "text-white" : "text-slate-600 hover:text-primary-600",
+                  useWhiteText
+                    ? "text-white"
+                    : "text-slate-600 hover:text-primary-600",
                   // Active state logic
-                  location.pathname === link.path && !useWhiteText ? "text-primary-600" : ""
+                  location.pathname === link.path && !useWhiteText
+                    ? "text-primary-600"
+                    : ""
                 )}
               >
                 {link.name}
               </Link>
             ))}
-            <Link 
-              to="/book" 
+            {/* Add this link before the Book Appointment button */}
+            <Link
+              to="/login"
+              className={cn(
+                "text-sm font-medium transition-colors hover:opacity-80 mr-4", // mr-4 adds spacing
+                useWhiteText
+                  ? "text-white"
+                  : "text-slate-600 hover:text-primary-600"
+              )}
+            >
+              Doctor Login
+            </Link>
+            <Link
+              to="/book"
               className={cn(
                 "px-5 py-2.5 rounded-full font-medium text-sm transition-all active:scale-95 shadow-lg",
-                useWhiteText 
-                  ? "bg-white text-primary-600 hover:bg-blue-50" 
+                useWhiteText
+                  ? "bg-white text-primary-600 hover:bg-blue-50"
                   : "bg-primary-600 text-white hover:bg-primary-700"
               )}
             >
@@ -102,7 +124,11 @@ export function Navbar() {
                 useWhiteText ? "text-white" : "text-slate-600"
               )}
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -113,7 +139,7 @@ export function Navbar() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
           >

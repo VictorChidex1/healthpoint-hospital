@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { doctors } from '../../data/doctors';
 import { Search, Stethoscope } from 'lucide-react';
 import { cn } from '../layout/Navbar';
@@ -11,7 +11,6 @@ interface DoctorSelectionProps {
 export function DoctorSelection({ selectedId, onSelect }: DoctorSelectionProps) {
   const [specialtyFilter, setSpecialtyFilter] = useState('All');
   
-  // Get unique specialties from your data
   const specialties = ['All', ...new Set(doctors.map(d => d.specialty))];
 
   const filteredDoctors = specialtyFilter === 'All' 
@@ -25,7 +24,6 @@ export function DoctorSelection({ selectedId, onSelect }: DoctorSelectionProps) 
         <p className="text-slate-500 mt-2">Select a doctor to view their availability</p>
       </div>
 
-      {/* Filter Tabs */}
       <div className="flex flex-wrap gap-2 justify-center mb-8">
         {specialties.map((spec) => (
           <button
@@ -43,7 +41,6 @@ export function DoctorSelection({ selectedId, onSelect }: DoctorSelectionProps) 
         ))}
       </div>
 
-      {/* Doctors Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredDoctors.map((doctor) => (
           <div
@@ -70,7 +67,6 @@ export function DoctorSelection({ selectedId, onSelect }: DoctorSelectionProps) 
               <p className="text-xs text-slate-500 mt-1 line-clamp-1">{doctor.description}</p>
             </div>
             
-            {/* Arrow indicating action */}
             <div className="absolute right-4 opacity-0 group-hover:opacity-100 transition-opacity text-primary-600">
               <Search className="w-5 h-5" />
             </div>
