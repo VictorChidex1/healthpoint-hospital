@@ -74,7 +74,7 @@ export function Hero() {
             >
               {[
                 { label: 'Specialists', value: '15+' },
-                { label: 'Patients', value: '10k+' },
+                { label: 'Patients', value: '15k+' },
                 { label: 'Rating', value: '4.9/5' },
               ].map((stat, index) => (
                 <div key={index}>
