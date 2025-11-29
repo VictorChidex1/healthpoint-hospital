@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-// Utility for Shadcn-like class merging
 export function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
 }
@@ -15,7 +14,9 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Effect to handle scroll styling
+  // Check if we are on a page with a blue header (like /book)
+  const isBluePage = location.pathname === '/book';
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -30,6 +31,9 @@ export function Navbar() {
     { name: 'Services', path: '/services' },
   ];
 
+  // Logic: Text is white ONLY if we are on a Blue Page AND haven't scrolled yet
+  const useWhiteText = isBluePage && !scrolled;
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -38,7 +42,7 @@ export function Navbar() {
       className={cn(
         "fixed w-full z-50 transition-all duration-300",
         scrolled 
-          ? "bg-white/80 backdrop-blur-md shadow-md py-2" 
+          ? "bg-white/90 backdrop-blur-md shadow-md py-2" 
           : "bg-transparent py-4"
       )}
     >
@@ -46,12 +50,15 @@ export function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="bg-primary-600 p-2 rounded-lg group-hover:bg-primary-700 transition-colors">
-              <Stethoscope className="h-6 w-6 text-white" />
+            <div className={cn(
+              "p-2 rounded-lg transition-colors",
+              useWhiteText ? "bg-white text-primary-600" : "bg-primary-600 text-white"
+            )}>
+              <Stethoscope className="h-6 w-6" />
             </div>
             <span className={cn(
               "text-xl font-bold transition-colors",
-              scrolled ? "text-slate-900" : "text-slate-900" 
+              useWhiteText ? "text-white" : "text-slate-900"
             )}>
               Healthpoint
             </span>
@@ -64,8 +71,10 @@ export function Navbar() {
                 key={link.name}
                 to={link.path}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary-600",
-                  location.pathname === link.path ? "text-primary-600" : "text-slate-600"
+                  "text-sm font-medium transition-colors hover:opacity-80",
+                  useWhiteText ? "text-white" : "text-slate-600 hover:text-primary-600",
+                  // Active state logic
+                  location.pathname === link.path && !useWhiteText ? "text-primary-600" : ""
                 )}
               >
                 {link.name}
@@ -73,7 +82,12 @@ export function Navbar() {
             ))}
             <Link 
               to="/book" 
-              className="bg-primary-600 text-white px-5 py-2.5 rounded-full font-medium text-sm hover:bg-primary-700 hover:shadow-lg transition-all active:scale-95"
+              className={cn(
+                "px-5 py-2.5 rounded-full font-medium text-sm transition-all active:scale-95 shadow-lg",
+                useWhiteText 
+                  ? "bg-white text-primary-600 hover:bg-blue-50" 
+                  : "bg-primary-600 text-white hover:bg-primary-700"
+              )}
             >
               Book Appointment
             </Link>
@@ -83,7 +97,10 @@ export function Navbar() {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-600 hover:text-primary-600 p-2"
+              className={cn(
+                "p-2 transition-colors",
+                useWhiteText ? "text-white" : "text-slate-600"
+              )}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -91,7 +108,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown (Animated) */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -111,13 +128,6 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link 
-                to="/book"
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-center mt-4 bg-primary-600 text-white px-5 py-3 rounded-lg font-medium hover:bg-primary-700"
-              >
-                Book Appointment
-              </Link>
             </div>
           </motion.div>
         )}
