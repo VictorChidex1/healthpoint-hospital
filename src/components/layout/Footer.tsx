@@ -186,7 +186,9 @@ export function Footer() {
                 </div>
                 <div>
                   <p className="text-white font-medium mb-1">Call Us</p>
-                  <p className="text-slate-400 text-sm">+234 (0) 800-CARE</p>
+                  <p className="text-slate-400 text-sm">
+                    +234 (0) 800-609-2134
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-4">

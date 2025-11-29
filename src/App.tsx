@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/layout/Navbar";
-import { Hero } from "./components/sections/Hero";
+import { Home } from "./pages/Home";
 import { BookingWizard } from "./components/booking/BookingWizard";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { LoginPage } from "./pages/LoginPage";
@@ -8,6 +8,10 @@ import { DoctorProfile } from "./pages/DoctorProfile";
 import { Doctors } from "./pages/Doctors";
 import { Services } from "./pages/Services";
 import { Contact } from "./pages/Contact";
+import { About } from "./pages/About";
+import { Terms } from "./pages/Terms";
+import { Privacy } from "./pages/Privacy";
+import { Help } from "./pages/Help";
 import { Footer } from "./components/layout/Footer"; // NEW IMPORT
 import { AppointmentProvider } from "./context/AppointmentContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -25,14 +29,7 @@ function App() {
             <div className="flex-grow">
               <Routes>
                 {/* Public Routes */}
-                <Route
-                  path="/"
-                  element={
-                    <main>
-                      <Hero />
-                    </main>
-                  }
-                />
+                <Route path="/" element={<Home />} />
 
                 <Route
                   path="/book"
@@ -71,6 +68,18 @@ function App() {
 
                 {/* Contact Page */}
                 <Route path="/contact" element={<Contact />} />
+
+                {/* About Page */}
+                <Route path="/about" element={<About />} />
+
+                {/* Terms Page */}
+                <Route path="/terms" element={<Terms />} />
+
+                {/* Privacy Page */}
+                <Route path="/privacy" element={<Privacy />} />
+
+                {/* Help Center Page */}
+                <Route path="/help" element={<Help />} />
 
                 {/* Authentication Routes */}
                 <Route path="/login" element={<LoginPage />} />
