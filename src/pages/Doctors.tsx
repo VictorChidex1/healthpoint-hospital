@@ -108,21 +108,20 @@ export function Doctors() {
                     {doctor.description}
                   </p>
 
-                  <div className="flex items-center gap-2 text-slate-400 text-xs mb-6">
-                    <MapPin className="w-4 h-4" />
-                    <span>Healthpoint Main Campus</span>
-                  </div>
-
                   <div className="flex gap-3">
                     <Link
-                      to="/book"
+                      to={`/book?doctorId=${doctor.id}`} // Option 1: Link directly to booking wizard (better UX)
                       className="flex-1 bg-primary-600 text-white py-2.5 rounded-lg font-medium text-center hover:bg-primary-700 transition-colors"
                     >
                       Book Appointment
                     </Link>
-                    <button className="px-3 py-2.5 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 transition-colors">
+                    {/* Profile Link (New) */}
+                    <Link
+                      to={`/doctors/${doctor.id}`}
+                      className="px-3 py-2.5 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-medium transition-colors"
+                    >
                       Profile
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

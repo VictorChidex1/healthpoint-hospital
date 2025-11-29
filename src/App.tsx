@@ -8,6 +8,7 @@ import { Doctors } from "./pages/Doctors"; // <--- New Import
 import { AppointmentProvider } from "./context/AppointmentContext";
 import { AuthProvider } from "./context/AuthContext"; // <--- New Import
 import { ProtectedRoute } from "./components/layout/ProtectedRoute"; // <--- New Import
+import { DoctorProfile } from "./pages/DoctorProfile";
 
 function App() {
   return (
@@ -56,10 +57,18 @@ function App() {
                 }
               />
 
-              <Route path="/doctors" element={<Doctors />} />
-
               {/* Login Route */}
               <Route path="/login" element={<LoginPage />} />
+
+              <Route
+                path="/doctors"
+                element={
+                  <div className="pt-0">
+                    <Doctors />
+                  </div> // Wrap the old Doctors component
+                }
+              />
+              <Route path="/doctors/:doctorId" element={<DoctorProfile />} />
 
               {/* Protected Admin Route */}
               <Route

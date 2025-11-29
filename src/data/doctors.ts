@@ -34,12 +34,12 @@ export const doctors: Doctor[] = [
     image: drAmara,
     description:
       "Focused on treating disorders of the nervous system, including migraines and epilepsy.",
-    availableDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    availableDays: ["Monday", "Tuesday", "Thursday", "Friday"],
     email: "amara.nwachukwu@healthpoint.com",
   },
   {
     id: "4",
-    name: "Dr. Ozioma Agbago",
+    name: "Dr. Ozioma Agbaho",
     specialty: "Oncology",
     image: drOzioma,
     description: "Focused on treating cancer and other tumors.",
@@ -48,7 +48,7 @@ export const doctors: Doctor[] = [
   },
   {
     id: "5",
-    name: "Dr. Chidera Agbago",
+    name: "Dr. Chidera Agbaho",
     specialty: "Dermatology",
     image: drChidera,
     description: "Focused on treating skin conditions and diseases.",
@@ -57,11 +57,11 @@ export const doctors: Doctor[] = [
   },
   {
     id: "6",
-    name: "Dr. Alex Agbago",
+    name: "Dr. Alex Agbaho",
     specialty: "optometry",
     image: drAlex,
     description: "Focused on treating eye conditions and diseases.",
-    availableDays: ["Monday", "Tuesday", "Wednesday", "Friday"],
+    availableDays: ["Tuesday", "Wednesday", "Friday"],
     email: "alex.agbago@healthpoint.com",
   },
 ];
