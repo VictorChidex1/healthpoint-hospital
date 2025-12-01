@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Stethoscope, User } from "lucide-react"; // Added 'User' icon
+import { Menu, X, Stethoscope, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { useAuth } from "../../context/AuthContext"; // Import Auth
+import { useAuth } from "../../context/AuthContext"; 
 
 export function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));

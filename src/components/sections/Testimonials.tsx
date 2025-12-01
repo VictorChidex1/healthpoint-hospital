@@ -4,21 +4,21 @@ import { Star, Quote } from "lucide-react";
 export function Testimonials() {
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Sarah Ibitoye",
       role: "Patient",
       content:
         "The care I received at Healthpoint was exceptional. The doctors listened to my concerns and explained everything clearly. I felt safe and well-cared for throughout my stay.",
       rating: 5,
     },
     {
-      name: "Michael Chen",
+      name: "Michael Amadi",
       role: "Patient",
       content:
         "I was impressed by the efficiency and professionalism of the staff. The facility is modern and clean, and the nursing team went above and beyond to make me comfortable.",
       rating: 5,
     },
     {
-      name: "Emily Davis",
+      name: "Emily Nwaka",
       role: "Mother of Patient",
       content:
         "The pediatric team was amazing with my son. They made a scary situation much easier for us to handle. We are so potential for their expertise and kindness.",

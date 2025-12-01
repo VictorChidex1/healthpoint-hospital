@@ -57,11 +57,11 @@ export const doctors: Doctor[] = [
   },
   {
     id: "6",
-    name: "Dr. Alex Agbaho",
+    name: "Dr. Alex Okafor",
     specialty: "optometry",
     image: drAlex,
     description: "Focused on treating eye conditions and diseases.",
     availableDays: ["Tuesday", "Wednesday", "Friday"],
-    email: "alex.agbago@healthpoint.com",
+    email: "alex.okafor@healthpoint.com",
   },
 ];
